@@ -8,9 +8,9 @@ namespace Basic_Payslip_Kata
 
         static void Main(string[] args)
         {
-            //ask about this
+            //Is it necessary to separate the entry point into its own class?
             PayslipGenerator payslipGenerator = new PayslipGenerator();
-            payslipGenerator.generate();
+            payslipGenerator.run();
         }
     }
 }
