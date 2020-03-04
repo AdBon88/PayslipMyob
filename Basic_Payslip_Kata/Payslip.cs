@@ -15,10 +15,10 @@ namespace Basic_Payslip_Kata {
             this.employee = employee;
             this.startDate = startDate;
             this.endDate = endDate;
-            this.grossIncome = calculateGrossIncome();
-            this.incomeTax = calculateIncomeTax();
-            this.netIncome = calculateNetIncome();
-            this.super = calculateSuper();
+            grossIncome = calculateGrossIncome();
+            incomeTax = calculateIncomeTax();
+            netIncome = calculateNetIncome();
+            super = calculateSuper();
         }
 
         private int calculateGrossIncome() {
@@ -30,7 +30,7 @@ namespace Basic_Payslip_Kata {
 
             //gives whole months between two dates, day of months is irrelevant
             monthsInPeriod = ((endDate.Year - startDate.Year) * 12) + endDate.Month - startDate.Month + 1;
-            unroundedGrossIncome = (double)annualSalary / 2 * monthsInPeriod; //is it correct to cast like this?
+            unroundedGrossIncome = (double)annualSalary / 12 * monthsInPeriod; //is it correct to cast like this?
             roundedGrossIncome = (int)Math.Round(unroundedGrossIncome, 0, MidpointRounding.AwayFromZero);
 
             return roundedGrossIncome;
@@ -48,16 +48,16 @@ namespace Basic_Payslip_Kata {
                     unroundedIncomeTax = 0.00;
                     break;
                 case int n when (n > 18200 && n <= 37000):
-                    unroundedIncomeTax = (annualSalary - 18200) * 0.19;
+                    unroundedIncomeTax = ((annualSalary - 18200) * 0.19)/12;
                     break;
                 case int n when (n > 37000 && n <= 87000):
-                    unroundedIncomeTax = (annualSalary - 37000) * 0.325 + 3572;
+                    unroundedIncomeTax = ((annualSalary - 37000) * 0.325 + 3572)/12;
                     break;
                 case int n when (n > 87000 && n <= 180000):
-                    unroundedIncomeTax = (annualSalary - 87000) * 0.37 + 19822;
+                    unroundedIncomeTax = ((annualSalary - 87000) * 0.37 + 19822)/12;
                     break;
                 case int n when (n > 180000):
-                    unroundedIncomeTax = (annualSalary - 180000) * 0.45 + 54232;
+                    unroundedIncomeTax = ((annualSalary - 180000) * 0.45 + 54232)/12;
                     break;
                 default:
                     unroundedIncomeTax = 0.00;
@@ -89,9 +89,14 @@ namespace Basic_Payslip_Kata {
             string firstName = employee.getFirstName();
             string surname = employee.getSurname();
 
-            stringPayslip = "Name: " + firstName + " " + surname + "/n"
-                + "Pay period: " + 
-       
+            stringPayslip = "Name: " + firstName + " " + surname + "\n"
+                + "Pay period: " + startDate.ToString("dd MMMM") + " - " + endDate.ToString("dd MMMM") + "\n"
+                + "Gross Income: " + grossIncome + "\n"
+                + "Income Tax: " + incomeTax + "\n"
+                + "Net Income: " + netIncome + "\n"
+                + "Super: " + super;
+
+            return stringPayslip;
 
         }
     }
