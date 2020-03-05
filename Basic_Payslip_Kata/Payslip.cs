@@ -1,8 +1,9 @@
 ﻿using System;
 
-//TODO ask if the calculation methods should be in this classs
 namespace Basic_Payslip_Kata {
     public class Payslip {
+
+        //apparently in C# it's convention to put a _ before private fields? News to me!
         private Employee employee;
         private DateTime startDate;
         private DateTime endDate;
