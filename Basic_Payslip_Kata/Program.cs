@@ -10,7 +10,7 @@ namespace Basic_Payslip_Kata
         {
             //Is it necessary to separate the entry point into its own class?
             PayslipGenerator payslipGenerator = new PayslipGenerator();
-            payslipGenerator.run();
+            payslipGenerator.start();
         }
     }
 }

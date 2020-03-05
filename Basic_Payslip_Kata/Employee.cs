@@ -3,8 +3,8 @@ namespace Basic_Payslip_Kata {
     public class Employee {
         private string firstName;
         private string surname;
-        private int annualSalary;
-        private int superRate;
+        private decimal annualSalary;
+        private decimal superRate;
 
         public Employee(string firstName, string surname, int annualSalary, int superRate) {
             this.firstName = firstName;
@@ -13,11 +13,11 @@ namespace Basic_Payslip_Kata {
             this.superRate = superRate;
         }
 
-        public int getAnnualSalary() {
+        public decimal getAnnualSalary() {
             return annualSalary;
         }
 
-        public int getSuperRate() {
+        public decimal getSuperRate() {
             return superRate;
         }
 

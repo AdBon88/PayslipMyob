@@ -6,10 +6,10 @@ namespace Basic_Payslip_Kata {
         private Employee employee;
         private DateTime startDate;
         private DateTime endDate;
-        int grossIncome;
-        int incomeTax;
-        int netIncome;
-        int super;
+        private decimal grossIncome;
+        private decimal incomeTax;
+        private decimal netIncome;
+        private decimal super;
 
         public Payslip(Employee employee, DateTime startDate, DateTime endDate) {
             this.employee = employee;
@@ -21,71 +21,64 @@ namespace Basic_Payslip_Kata {
             super = calculateSuper();
         }
 
-        private int calculateGrossIncome() {
-            int annualSalary = employee.getAnnualSalary();
-            int monthsInPeriod;
-            double unroundedGrossIncome;
-            int roundedGrossIncome;
-            Console.WriteLine(annualSalary);
+        private decimal calculateGrossIncome() {
+            decimal annualSalary = employee.getAnnualSalary();
+            decimal monthsInPeriod;
+            decimal grossIncome;
 
             //gives whole months between two dates, day of months is irrelevant
             monthsInPeriod = ((endDate.Year - startDate.Year) * 12) + endDate.Month - startDate.Month + 1;
-            unroundedGrossIncome = (double)annualSalary / 12 * monthsInPeriod; //is it correct to cast like this?
-            roundedGrossIncome = (int)Math.Round(unroundedGrossIncome, 0, MidpointRounding.AwayFromZero);
-
-            return roundedGrossIncome;
+            grossIncome = annualSalary/12 * monthsInPeriod;
+            grossIncome = Math.Round(grossIncome, 0, MidpointRounding.AwayFromZero);
+            return grossIncome;
         }
 
-        //TODO ask about appropriateness of numerical types (double vs decimal etc)
-        private int calculateIncomeTax() {
-            int annualSalary = employee.getAnnualSalary();
-            double unroundedIncomeTax;
-            int roundedIncomeTax;
+        private decimal calculateIncomeTax() {
+            decimal annualSalary = employee.getAnnualSalary();
+            decimal incomeTax;
 
-            //TODOI suspect there is a better way to do this than using a case statement...
+            //TODO I suspect there is a better way to do this than using a switch...
             switch (annualSalary) {
-                case int n when (n <= 18200):
-                    unroundedIncomeTax = 0.00;
+                case decimal n when (n <= 18200):
+                    incomeTax = 0;
                     break;
-                case int n when (n > 18200 && n <= 37000):
-                    unroundedIncomeTax = ((annualSalary - 18200) * 0.19)/12;
+                case decimal n when (n > 18200 && n <= 37000):
+                    incomeTax = (annualSalary - 18200) * 0.19m/12;
                     break;
-                case int n when (n > 37000 && n <= 87000):
-                    unroundedIncomeTax = ((annualSalary - 37000) * 0.325 + 3572)/12;
+                case decimal n when (n > 37000 && n <= 87000):
+                    incomeTax = ((annualSalary - 37000) * 0.325m + 3572)/12;
                     break;
-                case int n when (n > 87000 && n <= 180000):
-                    unroundedIncomeTax = ((annualSalary - 87000) * 0.37 + 19822)/12;
+                case decimal n when (n > 87000 && n <= 180000):
+                    incomeTax = ((annualSalary - 87000) * 0.37m + 19822)/12; 
                     break;
-                case int n when (n > 180000):
-                    unroundedIncomeTax = ((annualSalary - 180000) * 0.45 + 54232)/12;
+                case decimal n when (n > 180000):
+                    incomeTax = ((annualSalary - 180000) * 0.45m + 54232)/12;
                     break;
                 default:
-                    unroundedIncomeTax = 0.00;
+                    incomeTax = 0;
                     break;
             }
-            roundedIncomeTax = (int)Math.Round(unroundedIncomeTax, 0, MidpointRounding.AwayFromZero);
+            incomeTax = Math.Round(incomeTax, 0, MidpointRounding.AwayFromZero);
 
-            return roundedIncomeTax;
+            return incomeTax;
         }
 
-        private int calculateNetIncome() {
+        private decimal calculateNetIncome() {
             return grossIncome - incomeTax;
         }
 
-        private int calculateSuper() {
-            int superRate = employee.getSuperRate();
-            double unroundedSuper;
-            int roundedSuper;
+        private decimal calculateSuper() {
+            decimal superRate = employee.getSuperRate();
+            decimal super;
 
-            unroundedSuper = (double)grossIncome * (superRate / 100.00);
-            roundedSuper = (int)Math.Round(unroundedSuper, 0, MidpointRounding.AwayFromZero);
+            super = grossIncome * (superRate / 100);
+            super = Math.Round(super, 0, MidpointRounding.AwayFromZero);
 
-            return roundedSuper;
+            return super;
         }
 
         public string toString() {
             string stringPayslip;
-
             string firstName = employee.getFirstName();
             string surname = employee.getSurname();
 
