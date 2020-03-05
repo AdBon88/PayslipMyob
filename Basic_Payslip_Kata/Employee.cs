@@ -6,7 +6,7 @@ namespace Basic_Payslip_Kata {
         private decimal annualSalary;
         private decimal superRate;
 
-        public Employee(string firstName, string surname, int annualSalary, int superRate) {
+        public Employee(string firstName, string surname, decimal annualSalary, decimal superRate) {
             this.firstName = firstName;
             this.surname = surname;
             this.annualSalary = annualSalary;

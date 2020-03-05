@@ -18,8 +18,8 @@ namespace Basic_Payslip_Kata {
         private Employee getEmployeeDetailsFromUser() {
             string firstName;
             string surname;
-            int annualSalary;
-            int superRate;
+            decimal annualSalary;
+            decimal superRate;
 
             Console.WriteLine("Welcome to the payslip generator!");
             Console.WriteLine("");
@@ -32,12 +32,12 @@ namespace Basic_Payslip_Kata {
 
 
             Console.WriteLine("Please enter your annual salary:");
-            while (!int.TryParse(Console.ReadLine(), out annualSalary)) {
+            while (!decimal.TryParse(Console.ReadLine(), out annualSalary)) {
                 Console.WriteLine("Please Enter a valid numerical value!");
             }
         
             Console.WriteLine("Please enter your super rate:");
-            while (!int.TryParse(Console.ReadLine(), out superRate)){
+            while (!decimal.TryParse(Console.ReadLine(), out superRate)){
                 Console.WriteLine("Please Enter a valid numerical value!");
             }
 
